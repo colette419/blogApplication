@@ -1,0 +1,30 @@
+doctype html
+head
+    title Le Blog - Register
+    link(href='/stylesheet.css', rel='stylesheet')
+body#registerBody
+  h1 Please Enter the Following Information to Register:
+  p
+    form(action="/register" method="post")
+      fieldset 
+          legend#register Registeration Form
+          p
+          p.pInline First Name: 
+          input(type="text" name="firstName")
+          p
+          p.pInline Last Name: 
+          input(type="text" name="lastName")
+          p
+          p.pInline Email Address: 
+          input(type="text" name="email")
+          p
+          p.pInline Username: 
+          input(type="text" name="username")
+          p
+          p.pInline Password: 
+          input(type="password" name="password")
+          p
+          input(type="submit")
+     //     p  commenting this out for now; will add functionality to check if passwords match later on
+     //     p.pInline Confirm Password: 
+     //     input(type="password" name="password")

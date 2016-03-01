@@ -1,0 +1,22 @@
+body {
+	background-color: #FFFAFA;
+}
+
+#loginBody {
+	text-align: center;
+}
+
+#register {
+	font-size: 125%;
+}
+
+.pInline {
+	display: inline;
+	text-align: left;
+}
+
+.formInput {
+	font-weight: bold;
+}
+
+
