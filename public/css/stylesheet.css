@@ -19,4 +19,17 @@ body {
 	font-weight: bold;
 }
 
+#alert {
+	color: red;
+}
+
+#bodyForm {
+	width: 500px;
+	min-height: 200px;
+	vertical-align: top;
+}
+
+.cursive {
+	font-family: 'Brush Script MT', cursive;
+}
 

@@ -1,0 +1,17 @@
+doctype html
+head
+    title Le Blog - Make a Post
+    link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='js.cookie.js')
+    script(src='javascript.js')
+body#loginBody
+  h1 The Greatest Blog App the World Has Ever Seen
+  h2.cursive Unleash Your Brilliance!!!
+    form(action="/addPost" method="post")
+      p Title
+      input#title(type="text" name="blogTitle")
+      p Body
+      textarea#bodyForm(type="text" name="blogBody")
+      p
+      input#submitButton(type="submit")

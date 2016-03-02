@@ -1,18 +1,21 @@
 doctype html
 head
-    title Le Blog - Login
+    title Le Blog - BLogin
     link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='js.cookie.js')
+    script(src='javascript.js')
 body#loginBody
   h1 The Greatest Blog App the World Has Ever Seen
   h2 Please Enter Your Username and Password Below
     form(action="/" method="post")
       fieldset
         p Username
-        input(type="text" name="username")
+        input#userNameInput(type="text" name="username")
         p Password
-        input(type="password" name="password")
+        input#passwordInput(type="password" name="password")
         p
-        input(type="submit")
-        p 
-        If you do not have an account, please 
+        input#magicButton(type="submit")
+        p If you do not have an account, please 
         a(href='/register') register here.
+  h2#alert= message

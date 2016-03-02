@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		link(href='/stylesheet.css', rel='stylesheet')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+	body
+		h2 Welcome back, #{user.firstname}!
+		a(href='/addPost') make a new post
+		br
+		a(href='/#something') see all your posts
+		br
+		a(href='/#something') see all users posts
+		br
+		a(href='/logout') log out
+
