@@ -4,6 +4,7 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var Promise = require('promise');
+var bcrypt = require('bcrypt');
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
 	host: 'localhost',
@@ -133,28 +134,6 @@ app.post('/seePosts/:id', function(request, response) { //add if statement so yo
 	}
 });
 
-
-//***********************************************************
-
-// app.get('/seePosts/:id/commentsDisplay', function(request, response) {
-// 	Comment.findAll({
-// 		where: {
-// 			blogMessageId: request.params.id
-// 		}
-// 	}).then(function(lines) {
-// 		var commentBlob = lines.map(function(row) {
-// 			return {
-// 				id: row.dataValues.id,
-// 				author: row.dataValues.userID,
-// 				comment: row.dataValues.comment
-// 			}
-// 		});
-// 		response.send(commentBlob)
-// 	});
-// });
-
-//***********************************************************
-
 app.get('/seeMyPosts', function(req, res) { //renders the page to see list of USER'S post titles
 	var user = req.session.user;
 	if (user === undefined) {
@@ -181,6 +160,7 @@ app.get('/seeMyPosts', function(req, res) { //renders the page to see list of US
 });
 
 
+//***********************************************************
 
 app.post('/', function(request, response) {
 	User.findOne({
@@ -188,16 +168,25 @@ app.post('/', function(request, response) {
 			username: request.body.username
 		}
 	}).then(function(user) {
-		if (user !== null && request.body.password === user.password) {
+		bcrypt.compare(request.body.password, user.password, function(err, result) {
+			if (err !== undefined) {
+				console.log(err);
+			} else {
+				var matchin = result;
+			}
+		if (user !== null && matchin === true) {
 			request.session.user = user;
 			response.redirect('/profile');
 		} else {
 			response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
 		}
+		});
 	}, function(error) {
 		response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
 	});
 });
+
+//***********************************************************
 
 app.get('/profile', function(request, response) {
 	var user = request.session.user; // says which user it is
@@ -261,12 +250,19 @@ app.post('/register', function(req, res) {
 
 		}
 		if (uniqueUser === true) {
-			User.create({
-				firstname: req.body.firstName,
-				lastname: req.body.lastName,
-				email: req.body.email,
-				username: req.body.username,
-				password: req.body.password,
+			bcrypt.hash((req.body.password), 8, function(err, hash) {
+				if (err !== undefined) {
+					console.log(err);
+				} else {
+					var hashPassword = hash;
+				}
+				User.create({
+					firstname: req.body.firstName,
+					lastname: req.body.lastName,
+					email: req.body.email,
+					username: req.body.username,
+					password: hashPassword,
+				});
 			});
 			res.send("Registration was successful!");
 		} else {
