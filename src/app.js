@@ -35,6 +35,16 @@ var Post = sequelize.define('blogMessage', { // defines the Post model
 	postbody: Sequelize.TEXT
 });
 
+var Comment = sequelize.define('comment', { // defines the comment model
+	userID: Sequelize.STRING, // this will be the user's username
+	comment: Sequelize.TEXT // input
+});
+
+//connecting the post and comments tables
+
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
+
 
 app.use(session({ // this is how you manage sessions
 	secret: 'oh wow very secret much security',
@@ -46,9 +56,130 @@ app.use(session({ // this is how you manage sessions
 app.get('/', function(req, res) {
 	message: req.query.message,
 	res.render('login', {
-		message: req.query.message
+		message: req.query.message,
+		user: req.session.user
 	});
 });
+
+
+
+app.get('/seePosts', function(req, res) { //renders the page to see list of ALL post titles; must send an object containing the correct posts to that page
+	Post.findAll().then(function(lines) {
+		var columnData = lines.map(function(row) {
+			return {
+				id: row.dataValues.id,
+				user: row.dataValues.userID,
+				title: row.dataValues.posttitle,
+				body: row.dataValues.postbody,
+			}
+		});
+		console.log("columnData is " + columnData);
+		res.render('seePosts', {
+			message: columnData,
+		});
+	});
+});
+
+//renders the page to see each individual post. Add comments box to the jade file. 
+
+app.get('/seePosts/:id', function(request, response) {
+	var user = request.session.user;
+	if (user === undefined) {
+		response.redirect('/?message=' + encodeURIComponent("Please log in to comment on messages."));
+	} else {
+		Post.findById(request.params.id, {
+			include: [Comment]
+		}).then(function(post) {
+			var indPost = {
+				title: post.dataValues.posttitle,
+				body: post.dataValues.postbody,
+				id: post.dataValues.id
+			}
+			Comment.findAll({
+				where: {
+					blogMessageId: request.params.id
+				}
+			}).then(function(lines) {
+				var commentBlob = lines.map(function(row) {
+					return {
+						id: row.dataValues.id,
+						author: row.dataValues.userID,
+						comment: row.dataValues.comment
+					}
+				});
+
+				response.render('comment', {
+					post: indPost,
+					alert: request.query.alert,
+					comments: commentBlob
+				});
+			});
+		});
+	};
+});
+
+
+app.post('/seePosts/:id', function(request, response) { //add if statement so you can't add nothing comments with nothing.
+	if (request.body.commentBody.length === 0) {
+		response.redirect('/seePosts/' + request.params.id + '?alert=' + encodeURIComponent("!!!You must submit text to post a comment!!!"));
+	} else {
+		var user = request.session.user;
+		Comment.create({
+			userID: user.username,
+			comment: request.body.commentBody,
+			blogMessageId: request.params.id
+		});
+		response.redirect('/profile?message=' + encodeURIComponent("You've just successfully posted your brilliance. What next?"));
+	}
+});
+
+
+//***********************************************************
+
+// app.get('/seePosts/:id/commentsDisplay', function(request, response) {
+// 	Comment.findAll({
+// 		where: {
+// 			blogMessageId: request.params.id
+// 		}
+// 	}).then(function(lines) {
+// 		var commentBlob = lines.map(function(row) {
+// 			return {
+// 				id: row.dataValues.id,
+// 				author: row.dataValues.userID,
+// 				comment: row.dataValues.comment
+// 			}
+// 		});
+// 		response.send(commentBlob)
+// 	});
+// });
+
+//***********************************************************
+
+app.get('/seeMyPosts', function(req, res) { //renders the page to see list of USER'S post titles
+	var user = req.session.user;
+	if (user === undefined) {
+		res.redirect('/?message=' + encodeURIComponent("Please log in to view messages."));
+	} else {
+		Post.findAll({
+			where: {
+				userID: user.username
+			}
+		}).then(function(lines) {
+			var columnData = lines.map(function(row) {
+				return {
+					id: row.dataValues.id,
+					title: row.dataValues.posttitle,
+					body: row.dataValues.postbody,
+				}
+			});
+			console.log("columnData is " + columnData);
+			res.render('seeMyPosts', {
+				message: columnData,
+			});
+		});
+	}
+});
+
 
 
 app.post('/', function(request, response) {
@@ -74,6 +205,7 @@ app.get('/profile', function(request, response) {
 		response.redirect('/?message=' + encodeURIComponent("Please log in to view your profile."));
 	} else {
 		response.render('profile', {
+			message: request.query.message,
 			user: user
 		});
 	}
@@ -88,18 +220,16 @@ app.get('/addPost', function(req, res) {
 	} // will eventually pass parameters in here to display the titles of each post
 });
 
+
 app.post('/addPost', function(req, res) {
 	var user = req.session.user;
-	sequelize.sync().then(function() {
-		Post.create({
-			userID: user.username,
-			posttitle: req.body.blogTitle,
-			postbody: req.body.blogBody
-		});
-		res.send("Post was successful!");
+	Post.create({
+		userID: user.username,
+		posttitle: req.body.blogTitle,
+		postbody: req.body.blogBody
 	});
+	res.redirect('/profile?message=' + encodeURIComponent("You've just successfully posted your brilliance. What next?"));
 });
-
 
 app.get('/logout', function(request, response) { // route to end a session
 	request.session.destroy(function(error) { // this is how you end a session. 
@@ -118,7 +248,6 @@ app.get('/register', function(req, res) {
 app.post('/register', function(req, res) {
 	var uniqueUser = true;
 	User.findAll().then(function(users) {
-
 		var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
 			return {
 				email: user.dataValues.email,
@@ -132,22 +261,22 @@ app.post('/register', function(req, res) {
 
 		}
 		if (uniqueUser === true) {
-			sequelize.sync().then(function() {
-				User.create({
-					firstname: req.body.firstName,
-					lastname: req.body.lastName,
-					email: req.body.email,
-					username: req.body.username,
-					password: req.body.password,
-				});
-				res.send("Registration was successful!");
-			})
+			User.create({
+				firstname: req.body.firstName,
+				lastname: req.body.lastName,
+				email: req.body.email,
+				username: req.body.username,
+				password: req.body.password,
+			});
+			res.send("Registration was successful!");
 		} else {
 			res.send("This is not a unique user; please try registering again with a different email address or username.")
 		}
 	});
 });
 
-app.listen(3000, function() {
-	console.log('Example app listening on port 3000!');
+sequelize.sync().then(function() {
+	app.listen(3000, function() {
+		console.log('Example app listening on port 3000!');
+	});
 });

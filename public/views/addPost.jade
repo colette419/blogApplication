@@ -6,8 +6,8 @@ head
     script(src='js.cookie.js')
     script(src='javascript.js')
 body#loginBody
-  h1 The Greatest Blog App the World Has Ever Seen
-  h2.cursive Unleash Your Brilliance!!!
+    h1 The Greatest Blog App the World Has Ever Seen
+    h1.cursive Unleash Your Brilliance!!!
     form(action="/addPost" method="post")
       p Title
       input#title(type="text" name="blogTitle")
@@ -15,3 +15,4 @@ body#loginBody
       textarea#bodyForm(type="text" name="blogBody")
       p
       input#submitButton(type="submit")
+  a(href='/profile') go back to your landing page

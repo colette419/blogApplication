@@ -6,16 +6,21 @@ head
     script(src='js.cookie.js')
     script(src='javascript.js')
 body#loginBody
-  h1 The Greatest Blog App the World Has Ever Seen
-  h2 Please Enter Your Username and Password Below
-    form(action="/" method="post")
-      fieldset
-        p Username
-        input#userNameInput(type="text" name="username")
-        p Password
-        input#passwordInput(type="password" name="password")
-        p
-        input#magicButton(type="submit")
-        p If you do not have an account, please 
-        a(href='/register') register here.
-  h2#alert= message
+   if user
+      a(href='/profile') view profile
+      br
+      a(href='/logout') log out
+    else
+      h1 The Greatest Blog App the World Has Ever Seen
+      h2 Please Enter Your Username and Password Below
+        form(action="/" method="post")
+          fieldset
+            p Username
+            input#userNameInput(type="text" name="username")
+            p Password
+            input#passwordInput(type="password" name="password")
+            p
+            input#magicButton(type="submit")
+            p If you do not have an account, please 
+            a(href='/register') register here.
+    h2.alert= message

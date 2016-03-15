@@ -19,7 +19,7 @@ body {
 	font-weight: bold;
 }
 
-#alert {
+.alert {
 	color: red;
 }
 
@@ -31,5 +31,9 @@ body {
 
 .cursive {
 	font-family: 'Brush Script MT', cursive;
+}
+
+#commentForm {
+	width: 750px;
 }
 
