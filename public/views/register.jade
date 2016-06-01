@@ -1,33 +1,40 @@
 doctype html
 head
-    title Le Blog - Register
+    title Le Blog - Forgot Password
     link(href='/stylesheet.css', rel='stylesheet')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
-    script(src='js.cookie.js')
-    script(src='javascript.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
 body#registerBody
-  h1 Please Enter the Following Information to Register:
-  p
-    form(action="/register" method="post")
-      fieldset 
-          legend#register Registeration Form
-          p
-          p.pInline First Name: 
-          input(type="text" name="firstName")
-          p
-          p.pInline Last Name: 
-          input(type="text" name="lastName")
-          p
-          p.pInline Email Address: 
-          input(type="text" name="email")
-          p
-          p.pInline Username: 
-          input(type="text" name="username")
-          p
-          p.pInline Password: 
-          input(type="password" name="password")
-          p
-          input(type="submit")
-     //     p  commenting this out for now; will add functionality to check if passwords match later on
-     //     p.pInline Confirm Password: 
-     //     input(type="password" name="password")
+    div(class="banner")
+        h1 This Little Blog
+    div(class="lil_nav")
+        a(href="/")
+            img(src="/images/log.jpg")
+            p Go Back to Login
+    h1.alert=message
+    h2 Please Enter the Following Information to Register:
+    p
+      form(action="/register" method="post" class="registrationForm")
+            legend#register Registration Form
+            div(class="clump")
+              label First Name: 
+                input#registerFirstName(type="text" name="firstName" class="line")
+              label Last Name: 
+                input#registerLastName(type="text" name="lastName" class="line")
+              label Email Address: 
+                input#registerEmail(type="text" name="email" class="line")
+              label Username: 
+                input#registerUsername(type="text" name="username" class="line")
+              label Password: 
+                input#newPassword(type="password" name="password" class="line")
+              label Confirm Password: 
+                input#confirmPassword(type="password" name="confirmPassword" class="line")
+              input#registrationSubmit(type="submit")
+    footer(id="footer")
+      p made in 2016 by colette biervliet-schranz
+

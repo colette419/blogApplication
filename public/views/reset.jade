@@ -1,0 +1,34 @@
+doctype html
+head
+    title Le Blog - Reset Password
+    link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
+body
+    div(class="banner")
+      h1 This Little Blog
+    div(class="lil_nav")
+      a(href="/")
+        img(src="/images/log.jpg")
+        p Go Back to Login
+      a(href="/forgot")
+        img(src="/images/key.jpg")
+        p Go to Forgot Password Form
+    div(class="passwordMessage forgotPasswordMessage")
+      if passwordMessage
+          h2.alert= passwordMessage
+    div(id="resetForm")
+      form(method='POST')
+          legend Reset Password
+          label(for='password') New Password
+            input#changePassword(type='password', name='password', value='', placeholder='New password', autofocus=true)
+          label(for='confirm') Confirm Password
+            input#changePasswordConfirm(type='password', name='confirm', value='', placeholder='Confirm password')
+          button#passwordChangeSubmit(type='submit') Update Password
+    footer(id="footer")
+      p made in 2016 by colette biervliet-schranz

@@ -1,0 +1,59 @@
+doctype html
+head
+    title Le Blog - Forgot Password
+    link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
+body
+    if user
+        nav
+            ul
+                li
+                    a(href='/profile') menu
+                li
+                    a(href='/addPost') new post 
+                li
+                    a(href='/seeMyPosts') see my posts
+                li
+                    a(href='/seePosts') see all posts
+                li(class="selected")
+                    a(href='/edit') edit profile
+                li
+                    a(href='/logout') logout
+        div(class="passwordMessage" class="forgotPasswordMessage")
+            if passwordMessage
+                h2.alert= passwordMessage
+        br
+        div(id="resetPasswordForm")
+            h2 Forgotten Password Form
+            form(method='POST')
+                legend Forgot Password
+                label(for='email') Email: 
+                  input(type='text', name='email')
+                button(type='submit') Reset Password
+        footer(id="footer")
+            p made in 2016 by colette biervliet-schranz
+    else 
+        div(class="banner")
+            h1 This Little Blog
+        div(class="lil_nav")
+            a(href="/")
+                img(src="/images/log.jpg")
+                p Go Back to Login
+        div(class="passwordMessage" class="forgotPasswordMessage")
+            if passwordMessage
+                h2.alert= passwordMessage
+        div(id="resetPasswordForm")
+            h2 Forgotten Password Form
+            form(method='POST')
+                legend Forgot Password
+                label(for='email') Email: 
+                  input(type='text', name='email')
+                button(type='submit') Reset Password
+        footer(id="footer")
+            p made in 2016 by colette biervliet-schranz

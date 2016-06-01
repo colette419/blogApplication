@@ -1,39 +1,412 @@
+/********************************************************
+VARIABLES
+*********************************************************/
+/********************************************************
+GENERAL STYLES
+*********************************************************/
 body {
-	background-color: #FFFAFA;
-}
+  background-image: url("images/wooden-panels.jpg");
+  background-size: 100%;
+  font-family: 'Swanky and Moo Moo', cursive;
+  color: #3c2a1e; }
 
-#loginBody {
-	text-align: center;
-}
-
-#register {
-	font-size: 125%;
-}
-
-.pInline {
-	display: inline;
-	text-align: left;
-}
-
-.formInput {
-	font-weight: bold;
-}
+.banner {
+  background: url("images/coffee-banner.jpg");
+  height: 150px;
+  background-size: 100%;
+  border: 1px solid #6f4e37;
+  text-align: center; }
+  .banner h1 {
+    font-weight: bold;
+    font-size: 300%; }
 
 .alert {
-	color: red;
-}
+  color: #cd0033;
+  text-align: center; }
 
-#bodyForm {
-	width: 500px;
-	min-height: 200px;
-	vertical-align: top;
-}
+footer {
+  clear: both;
+  text-align: center; }
 
-.cursive {
-	font-family: 'Brush Script MT', cursive;
-}
+nav {
+  width: 100%;
+  height: 50px;
+  float: left;
+  background: #3c2a1e;
+  margin-bottom: 20px; }
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-height: 100%; }
+  nav li {
+    padding: 0;
+    list-style: none;
+    box-shadow: 0 0 0 1px #6f4e37 inset;
+    width: 16.6666%;
+    float: left; }
+    nav li a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      height: 50px;
+      color: #916648;
+      font-size: 110%; }
+      nav li a:hover {
+        color: #6f4e37;
+        text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff; }
 
-#commentForm {
-	width: 750px;
-}
+.selected a {
+  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+  color: #6f4e37; }
 
+/********************************************************
+PAGES: LOGIN PAGE
+*********************************************************/
+#loginBody {
+  text-align: center; }
+  #loginBody h2 {
+    margin-left: 20px;
+    margin-right: 20px; }
+
+#formAndMessages p {
+  font-size: 150%;
+  margin-bottom: 0px; }
+#formAndMessages form a {
+  color: #3c2a1e;
+  display: block;
+  margin-bottom: 20px; }
+  #formAndMessages form a:hover {
+    color: #6f4e37; }
+#formAndMessages form input {
+  display: block;
+  margin: auto; }
+#formAndMessages a {
+  color: #3c2a1e; }
+  #formAndMessages a:hover {
+    color: #6f4e37; }
+
+#loginBottom {
+  width: 80%;
+  margin: auto; }
+
+#magicButton, #submitButton, #resetPasswordForm button, #passwordChangeSubmit, .commentDropdown .commentSubmit, #registrationSubmit, #editingSubmit {
+  border-radius: 10%;
+  background: #6f4e37;
+  color: white; }
+  #magicButton:hover, #submitButton:hover, #resetPasswordForm button:hover, #passwordChangeSubmit:hover, .commentDropdown .commentSubmit:hover, #registrationSubmit:hover, #editingSubmit:hover {
+    background: #2b1e15; }
+
+#register {
+  font-size: 125%; }
+
+.choices a {
+  color: #3c2a1e;
+  font-size: 150%; }
+  .choices a:hover {
+    color: #6f4e37; }
+
+/********************************************************
+PAGES: PROFILE PAGE
+*********************************************************/
+#profilePage h2 {
+  font-size: 150%;
+  text-align: center; }
+
+.welcome, #addPost h2, .intro h2, .messageDisplay h2, #registerBody h2 {
+  margin: 100px 50px 50px 50px;
+  padding: 20px;
+  border: 2px solid #3c2a1e;
+  text-align: center; }
+
+#options {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  #options a {
+    font-size: 150%;
+    color: #3c2a1e; }
+    #options a:hover {
+      color: #6f4e37; }
+    #options a img {
+      width: 100px;
+      height: 100px;
+      padding: 0;
+      margin: 0;
+      border-radius: 10%; }
+    #options a p {
+      padding: 0;
+      margin: 0; }
+  #options li {
+    float: left;
+    width: 100%;
+    margin: 2.5%;
+    text-align: center; }
+    #options li:hover img {
+      box-shadow: 0px 0px 40px #fff; }
+    #options li:hover a {
+      color: #6f4e37; }
+
+/********************************************************
+PAGES: ADD POST
+*********************************************************/
+#addPost {
+  text-align: center; }
+  #addPost h2 {
+    margin-bottom: 20px; }
+  #addPost form {
+    text-align: center;
+    margin: auto;
+    max-width: 900px; }
+    #addPost form p {
+      font-size: 150%;
+      margin: 0; }
+
+#postTitle {
+  width: 70%;
+  text-align: center;
+  font-size: 150%; }
+  #postTitle:focus {
+    outline-color: #1e2f3c; }
+
+#postBody {
+  margin-top: 20px; }
+  #postBody textarea {
+    width: 70%;
+    min-height: 200px;
+    font-size: 150%; }
+    #postBody textarea:focus {
+      outline-color: #1e2f3c; }
+
+#submitButton {
+  margin-top: 10px; }
+
+/********************************************************
+PAGES: FORGOT
+*********************************************************/
+.lil_nav {
+  text-align: center; }
+  .lil_nav img {
+    height: 100px;
+    width: 100px;
+    border: 1px solid #3c2a1e;
+    margin-top: 20px;
+    margin-bottom: 0; }
+  .lil_nav a {
+    color: #3c2a1e; }
+    .lil_nav a p {
+      margin-top: 0;
+      padding-top: 0; }
+
+#resetPasswordForm {
+  margin: auto; }
+  #resetPasswordForm h2 {
+    padding: 20px;
+    border: 2px solid #3c2a1e;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 100px; }
+  #resetPasswordForm form {
+    text-align: center;
+    outline: 1px solid #3c2a1e;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px; }
+    #resetPasswordForm form legend {
+      font-size: 125%;
+      padding-left: 5px; }
+  #resetPasswordForm button {
+    margin: 20px auto auto auto;
+    display: block; }
+
+.forgotPasswordMessage h2 {
+  width: 80%;
+  margin: auto; }
+
+#resetForm form {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  outline: 1px solid #3c2a1e;
+  padding: 10px; }
+#resetForm label {
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 0; }
+#resetForm input {
+  display: block;
+  margin: auto; }
+
+/********************************************************
+PAGES: SEE MY POSTS / SEE ALL POSTS
+*********************************************************/
+.intro h2 {
+  margin-bottom: 20px; }
+
+.messageDisplay {
+  padding: 20px; }
+  .messageDisplay h2 {
+    margin-bottom: 20px; }
+  .messageDisplay li {
+    list-style-type: none;
+    opacity: 0.9;
+    margin: auto;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    max-width: 900px; }
+  .messageDisplay p {
+    font-size: 125%;
+    padding: 20px;
+    background-color: #916648;
+    margin-top: 0;
+    margin-bottom: 0; }
+
+.tableOfContents {
+  border: 1px solid #3c2a1e;
+  text-align: center;
+  margin: auto;
+  width: 70%;
+  margin-bottom: 20px; }
+  .tableOfContents h3 {
+    font-size: 150%;
+    margin: 0;
+    color: #3c2a1e;
+    border-bottom: 1px solid #3c2a1e; }
+  .tableOfContents li {
+    margin: 0;
+    list-style: none; }
+    .tableOfContents li a {
+      color: #3c2a1e;
+      font-size: 125%; }
+
+p.titleLink, a.commentLink {
+  display: block;
+  color: #3c2a1e;
+  background: #f2ebe6;
+  font-size: 150%;
+  text-align: center;
+  border-radius: 25px 25px 0 0;
+  color: #3c2a1e;
+  padding: 0; }
+
+a.commentLink {
+  border-radius: 0 0 25px 25px;
+  text-decoration: none;
+  background: #d1b5a1;
+  font-size: 125%;
+  cursor: pointer;
+  cursor: hand; }
+
+.commentDropdown {
+  background-color: #6f4e37;
+  width: 80%;
+  margin: auto;
+  color: white;
+  text-align: center; }
+  .commentDropdown ul {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 0;
+    margin-bottom: 0; }
+  .commentDropdown li {
+    text-align: center;
+    margin-bottom: 0;
+    margin-left: 0;
+    border: 1px solid #3c2a1e;
+    border-top: 0;
+    border-radius: 0;
+    padding: 10px; }
+  .commentDropdown .commentWrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #3c2a1e;
+    border-top: 0; }
+  .commentDropdown .commentForm {
+    width: 90%; }
+  .commentDropdown .commentSubmit {
+    display: block;
+    margin: auto;
+    background: #1a120d;
+    cursor: pointer;
+    cursor: hand; }
+
+/********************************************************
+PAGES: REGISTRATION FORM
+*********************************************************/
+#registerBody h2 {
+  margin-top: 10px; }
+
+.registrationForm {
+  margin: auto;
+  width: 80%;
+  outline: 1px solid #3c2a1e;
+  padding: 20px;
+  text-align: center; }
+  .registrationForm label {
+    display: block;
+    text-align: right; }
+  .registrationForm .line {
+    margin-bottom: 10px; }
+  .registrationForm .clump {
+    margin: auto;
+    display: inline-block; }
+
+#registrationSubmit, #editingSubmit {
+  margin: auto;
+  display: block; }
+
+.pInline {
+  display: inline;
+  text-align: left; }
+
+.formInput {
+  font-weight: bold; }
+
+/********************************************************
+PAGES: EDITING FORM
+*********************************************************/
+.editingArena {
+  display: block; }
+
+.existingUserInfo {
+  border: 1px solid #3c2a1e;
+  text-align: center;
+  padding-top: 50px; }
+  .existingUserInfo h2 {
+    text-align: center; }
+  .existingUserInfo ul {
+    list-style: none;
+    display: inline-block;
+    margin-top: 0; }
+    .existingUserInfo ul li {
+      text-align: left; }
+      .existingUserInfo ul li span {
+        font-size: 125%;
+        font-weight: bold; }
+
+.editingForm {
+  border: 1px solid #3c2a1e;
+  padding: 20px;
+  text-align: center; }
+  .editingForm p {
+    font-size: 125%; }
+  .editingForm a {
+    color: #3c2a1e; }
+    .editingForm a:hover {
+      color: #6f4e37; }
+  .editingForm h2 {
+    text-align: center; }
+  .editingForm .line {
+    margin-bottom: 10px;
+    display: inline-block; }
+  .editingForm .projectCenterInputs {
+    display: inline-block;
+    margin: auto;
+    text-align: right; }
+    .editingForm .projectCenterInputs label {
+      font-size: 125%; }
+
+/*# sourceMappingURL=stylesheet.css.map */
