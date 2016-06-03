@@ -1,0 +1,105 @@
+/********************************************************
+OVERWRITES FOR SMARTPHONE TO TABLET
+*********************************************************/
+@media screen and (min-width: 480px) {
+  /********************************************************
+  PAGES: FORGOT
+  *********************************************************/
+  #forgotPasswordMessage h2 {
+    font-size: 200%; }
+
+  #resetForm legend {
+    font-size: 200%; }
+  #resetForm label {
+    font-size: 150%; }
+
+  /********************************************************
+  PAGES: LOGIN PAGE
+  *********************************************************/
+  #loginBody h2 {
+    font-size: 200%; }
+
+  #formAndMessages p {
+    font-size: 200%; }
+
+  #magicButton, #submitButton {
+    font-size: 150%; }
+
+    /********************************************************
+    PAGES: PROFILE PAGE
+*********************************************************/
+  #options li {
+    float: left;
+    width: 45%;
+    margin: 2.5%; }
+
+  #profilePage h2 {
+    font-size: 200%; }
+
+    /********************************************************
+PAGES: ADD POST
+*********************************************************/
+  #addPost h2 {
+    font-size: 200%; }
+  #addPost form p {
+    font-size: 200%;
+    margin: 0; }
+
+  #postBody textarea {
+    min-height: 300px; }
+
+  #submitButton {
+    margin-top: 10px; }
+
+  a.commentLink {
+    font-size: 150%; }
+
+    /********************************************************
+PAGES: REGISTRATION
+*********************************************************/
+  .registrationForm .line {
+    width: 250px; }
+  .registrationForm label {
+    font-size: 125%; }
+
+  .existingUserInfo {
+    font-size: 150%; } }
+/********************************************************
+OVERWRITES FOR TABLET TO DESKTOP
+*********************************************************/
+@media screen and (min-width: 660px) {
+  .registrationForm .line {
+    width: 350px; }
+
+  /********************************************************
+  PAGES: LOGIN PAGE
+  *********************************************************/
+  #loginBody h2 {
+    font-size: 300%; }
+
+    /********************************************************
+    PAGES: PROFILE PAGE
+*********************************************************/
+  #options a img {
+    width: 300px;
+    height: 300px; }
+
+  #profilePage h2 {
+    font-size: 250%; }
+
+    /********************************************************
+PAGES: ADD POST
+*********************************************************/
+  #addPost h2 {
+    font-size: 250%; }
+  #addPost form p {
+    font-size: 200%;
+    margin: 0; }
+
+  #postBody textarea {
+    min-height: 400px; } }
+@media screen and (min-width: 800px) {
+  nav li a {
+    font-size: 150%; } }
+
+/*# sourceMappingURL=responsive.css.map */

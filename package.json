@@ -6,13 +6,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.2",
+    "cookieparser": "^0.1.0",
+    "crypto": "0.0.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "fs": "0.0.2",
     "jade": "^1.11.0",
-    "pg": "^4.4.6",
+    "node-sass": "^3.4.2",
+    "nodemailer": "^0.7.1",
+    "pg": "^4.5.5",
     "promise": "^7.1.1",
-    "sequelize": "^3.19.3"
+    "rand-token": "^0.2.1",
+    "sequelize": "^3.19.3",
+    "util": "^0.10.3"
   }
 }

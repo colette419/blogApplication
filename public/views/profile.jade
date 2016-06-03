@@ -1,16 +1,55 @@
 doctype html
 html
-	head
-		link(href='/stylesheet.css', rel='stylesheet')
-		script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
-	body
-		h2= message
-		h2 Welcome back, #{user.firstname}!
-		a(href='/addPost') make a new post
-		br
-		a(href='/seeMyPosts') see all your posts
-		br
-		a(href='/seePosts') see all users posts
-		br
-		a(href='/logout') log out
+    head
+        link(href='/stylesheet.css', rel='stylesheet')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+        link(href='/normalize.css', rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+        link(href='/stylesheet.css', rel='stylesheet')
+        link(href='/responsive.css', rel='stylesheet')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+        script(src='scripts/javascript.js')
+    body(id="profilePage")
+        div(class="banner")
+            h1 This Little Blog
+        nav
+            ul
+                li(class="selected")
+                    a(href='/profile') menu
+                li
+                    a(href='/addPost') new post 
+                li
+                    a(href='/seeMyPosts') see my posts
+                li
+                    a(href='/seePosts') see all posts
+                li
+                    a(href='/edit') edit profile
+                li
+                    a(href='/logout') logout
+        h2= message
+        h2(id="welcome") Welcome, #{user.firstname}! What would you like to do?
+        ul(id="options")
+            li
+                a(href='/addPost')
+                    img(src="images/postIt.jpg")
+                    p make a new post
+            li
+                a(href='/seeMyPosts')
+                    img(src="images/book.jpg")
+                    p see all your posts
+            li
+                a(href='/seePosts')
+                    img(src="images/books.jpg")
+                    p see all users posts
+            li
+                a(href='/edit')
+                    img(src="images/pencil.jpg")
+                    p edit my profile
+            li
+                a(href='/logout')
+                    img(src="images/logOut.jpg")
+                    p logout
+
+        footer(id="footer")
+            p made in 2016 by colette biervliet-schranz
 

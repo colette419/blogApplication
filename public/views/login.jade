@@ -1,26 +1,40 @@
 doctype html
 head
-    title Le Blog - BLogin
+    title This Little Blog - BLogin
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
     link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
     script(src='js.cookie.js')
     script(src='javascript.js')
 body#loginBody
    if user
-      a(href='/profile') view profile
-      br
-      a(href='/logout') log out
+      div(class="passwordMessage")
+        if passwordMessage
+        h2.alert= passwordMessage
+      div(class="choices")
+        a(href='/profile') view profile
+        br
+        a(href='/logout') log out
     else
-      h1 The Greatest Blog App the World Has Ever Seen
-      h2 Please Enter Your Username and Password Below
-        form(action="/" method="post")
-          fieldset
-            p Username
-            input#userNameInput(type="text" name="username")
+      div(class="banner")
+        h1 This Little Blog
+      div(class="passwordMessage")
+        if passwordMessage
+          h2.alert= passwordMessage
+      div(id="formAndMessages")
+        h2.alert= message
+        h2 Please Enter Your Email and Password Below:
+        form(action="/" method="post" id="loginForm")
+            p Email
+            input#userNameInput(type="text" name="email")
             p Password
             input#passwordInput(type="password" name="password")
-            p
+            a(href='/forgot') Forgot your password?
             input#magicButton(type="submit")
-            p If you do not have an account, please 
+        div(id="loginBottom")
+          p If you do not have an account, please 
             a(href='/register') register here.
-    h2.alert= message
+      footer(id="footer")
+        p made in 2016 by colette biervliet-schranz

@@ -1,0 +1,61 @@
+doctype html
+head
+    title Le Blog - Edit Profile
+    link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
+body
+    div(class="banner")
+        h1 This Little Blog
+    nav
+        ul
+            li
+                a(href='/profile') menu
+            li
+                a(href='/addPost') new post 
+            li
+                a(href='/seeMyPosts') see my posts
+            li
+                a(href='/seePosts') see all posts
+            li(class="selected")
+                a(href='/edit') edit profile
+            li
+                a(href='/logout') logout
+    div(class="userMessage")
+      if userMessage
+        h2.alert= userMessage
+      if emailMessage
+        h2.alert= emailMessage
+      if changesMessage
+        h2.alert= changesMessage
+    div(class="editingArena")
+      div(class="existingUserInfo")
+        h2 Existing Information:
+        ul
+          li 
+            span(class="bold") First Name: 
+            | #{user.firstname} 
+            a(href='/changeFirstName' class="editingButton") edit
+          li
+            span(class="bold") Last Name: 
+            | #{user.lastname} 
+            a(href='/changeLastName' class="editingButton") edit
+          li 
+            span(class="bold") Email Address: 
+            | #{user.email} 
+            a(href='/changeEmail' class="editingButton") edit
+          li 
+            span(class="bold") Username: 
+            | #{user.username} 
+            a(href='/changeusername' class="editingButton") edit
+          li 
+            span(class="bold") Password: 
+            | (hidden)
+            a(href='/forgot' class="editingButton") edit
+    footer(id="footer")
+      p made in 2016 by colette biervliet-schranz

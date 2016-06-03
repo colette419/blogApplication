@@ -1,27 +1,46 @@
 doctype html
 head
-    title Le Blog - Read and Comment
+    title Le Blog - My Posts
     link(href='/stylesheet.css', rel='stylesheet')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
-    script(src='resource/js.cookie.js')
-    script(src='resource/javascript.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
 body
-  h1 The Greatest Blog App the World Has Ever Seen
+  div(class="banner")
+        h1 This Little Blog
+  nav
+    ul
+        li
+            a(href='/profile') menu 
+        li
+            a(href='/addPost') new post 
+        li
+            a(href='/seeMyPosts') see my posts
+        li
+            a(href='/seePosts') see all posts
+        li
+            a(href='/edit') edit profile
+        li
+            a(href='/logout') logout
   h2.alert= alert
-  h2= post.title
-  h2= post.body
-  div
+  h2(class="welcome")= post.title
+  div(id="commentBody")
+    h2= post.body
+  div(id="commentsArea")
     h3 Comments on this post:
     each comment in comments
       li #{comment.comment} (#{comment.author})
-  div
+  div(id="commentingArea")
     p Comment away!
       form(action="/seePosts/#{post.id}" method="post")
         p
         textarea#commentForm(type="text" name="commentBody")
         p
         input#submitButton(type="submit")
-  p
-    a(href='/profile') go back to your landing page
-  p
-    a(href='/seePosts') see all user posts
+
+  footer(id="footer")
+    p made in 2016 by colette biervliet-schranz
