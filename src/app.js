@@ -12,9 +12,20 @@ var nodemailer = require('nodemailer');
 var randtoken = require('rand-token');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
-var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
-    host: 'localhost',
-    dialect: 'postgres'
+
+
+
+
+// var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
+//     host: 'localhost',
+//     dialect: 'postgres'
+// });
+
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+  logging: false,
+  dialectOptions: {
+    ssl: true /* for SSL config since Heroku gives you this out of the box */
+  }
 });
 
 app.set('view engine', 'jade');
