@@ -39,34 +39,23 @@ body
         ul
           li 
             span(class="bold") First Name: 
-            | #{user.firstname}
-          li 
+            | #{user.firstname} 
+            a(href='/changeFirstName' class="editingButton") edit
+          li
             span(class="bold") Last Name: 
-            | #{user.lastname}
+            | #{user.lastname} 
+            a(href='/changeLastName' class="editingButton") edit
           li 
             span(class="bold") Email Address: 
-            | #{user.email}
+            | #{user.email} 
+            a(href='/changeEmail' class="editingButton") edit
           li 
             span(class="bold") Username: 
-            | #{user.username}
-      div(class="editingForm")
-        form(action="/edit" method="post" id="formToEdit")
-          h2 Make Changes Below:
-          div(class="projectCenterInputs")
-            label First Name: 
-              input(type="text" name="firstName" class="line")
-            br
-            label Last Name: 
-              input#editingLastName(type="text" name="lastName" class="line")
-            br
-            label Email Address: 
-              input#editingEmail(type="text" name="email" class="line")
-            br
-            label Username: 
-              input#editingUsername(type="text" name="username" class="line")
-          input#editingSubmit(type="submit")
-          p Click 
-            a(href='/forgot') here
-            |  for a password reset form.
+            | #{user.username} 
+            a(href='/changeusername' class="editingButton") edit
+          li 
+            span(class="bold") Password: 
+            | (hidden)
+            a(href='/forgot' class="editingButton") edit
     footer(id="footer")
       p made in 2016 by colette biervliet-schranz

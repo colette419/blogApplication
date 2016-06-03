@@ -1,6 +1,6 @@
 doctype html
 head
-    title Le Blog - Forgot Password
+    title Le Blog - Register
     link(href='/stylesheet.css', rel='stylesheet')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
     link(href='/normalize.css', rel='stylesheet')
@@ -19,7 +19,7 @@ body#registerBody
     h1.alert=message
     h2 Please Enter the Following Information to Register:
     p
-      form(action="/register" method="post" class="registrationForm")
+      form(action="/register" method="post" class="registrationForm EmailInputCheckButton")
             legend#register Registration Form
             div(class="clump")
               label First Name: 
@@ -27,7 +27,7 @@ body#registerBody
               label Last Name: 
                 input#registerLastName(type="text" name="lastName" class="line")
               label Email Address: 
-                input#registerEmail(type="text" name="email" class="line")
+                input#registerEmail(type="text" name="email" class="line EmailInputCheck")
               label Username: 
                 input#registerUsername(type="text" name="username" class="line")
               label Password: 

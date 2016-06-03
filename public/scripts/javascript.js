@@ -60,7 +60,7 @@ $(document).ready(function() {
                     });
             });
 
-            $("#editingEmail").blur(function() {
+            $(".EmailInputCheck").blur(function() {
                 if ($(this).val().trim().length > 0) {
                     var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                     if ($(this).val().trim().match(mailFormat)) {
@@ -71,10 +71,10 @@ $(document).ready(function() {
                 }
             });
 
-            $("#formToEdit").on('submit', function(event) {
-                    if ($("#editingEmail").val().trim().length > 0) {
+            $(".EmailInputCheckButton").on('submit', function(event) {
+                    if ($(".EmailInputCheck").val().trim().length > 0) {
                         var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                        if ($("#editingEmail").val().trim().match(mailFormat)) {
+                        if ($(".EmailInputCheck").val().trim().match(mailFormat)) {
                             return (true);
                         }
                         event.preventDefault();

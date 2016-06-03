@@ -90,11 +90,11 @@ PAGES: LOGIN PAGE
   width: 80%;
   margin: auto; }
 
-#magicButton, #submitButton, #resetPasswordForm button, #passwordChangeSubmit, .commentDropdown .commentSubmit, #registrationSubmit, #editingSubmit {
+#magicButton, #submitButton, #resetPasswordForm button, #passwordChangeSubmit, .commentDropdown .commentSubmit, #registrationSubmit, .editingButton, .indEditingPage .editingSubmitButton {
   border-radius: 10%;
   background: #6f4e37;
   color: white; }
-  #magicButton:hover, #submitButton:hover, #resetPasswordForm button:hover, #passwordChangeSubmit:hover, .commentDropdown .commentSubmit:hover, #registrationSubmit:hover, #editingSubmit:hover {
+  #magicButton:hover, #submitButton:hover, #resetPasswordForm button:hover, #passwordChangeSubmit:hover, .commentDropdown .commentSubmit:hover, #registrationSubmit:hover, .editingButton:hover, .indEditingPage .editingSubmitButton:hover {
     background: #2b1e15; }
 
 #register {
@@ -318,7 +318,8 @@ a.commentLink {
     border: 1px solid #3c2a1e;
     border-top: 0;
     border-radius: 0;
-    padding: 10px; }
+    padding: 10px;
+    font-size: 125%; }
   .commentDropdown .commentWrapper {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -354,7 +355,7 @@ PAGES: REGISTRATION FORM
     margin: auto;
     display: inline-block; }
 
-#registrationSubmit, #editingSubmit {
+#registrationSubmit, .editingButton, .indEditingPage .editingSubmitButton {
   margin: auto;
   display: block; }
 
@@ -373,40 +374,61 @@ PAGES: EDITING FORM
 
 .existingUserInfo {
   border: 1px solid #3c2a1e;
+  border-bottom: 0px;
   text-align: center;
   padding-top: 50px; }
+  .existingUserInfo p a {
+    color: #3c2a1e; }
+    .existingUserInfo p a:hover {
+      color: #6f4e37; }
   .existingUserInfo h2 {
     text-align: center; }
   .existingUserInfo ul {
     list-style: none;
     display: inline-block;
-    margin-top: 0; }
+    margin-top: 0;
+    margin-left: 0;
+    padding-left: 0; }
     .existingUserInfo ul li {
-      text-align: left; }
+      text-align: left;
+      border: 1px solid #3c2a1e;
+      border-bottom: 0;
+      padding: 5px; }
+      .existingUserInfo ul li:last-child {
+        border-bottom: 1px solid #3c2a1e; }
       .existingUserInfo ul li span {
         font-size: 125%;
         font-weight: bold; }
 
-.editingForm {
-  border: 1px solid #3c2a1e;
-  padding: 20px;
+.editingButton {
+  display: inline;
+  float: right;
+  text-decoration: none;
+  padding: 2px;
+  margin-left: 20px; }
+
+.indEditingPage {
   text-align: center; }
-  .editingForm p {
-    font-size: 125%; }
-  .editingForm a {
-    color: #3c2a1e; }
-    .editingForm a:hover {
-      color: #6f4e37; }
-  .editingForm h2 {
-    text-align: center; }
-  .editingForm .line {
-    margin-bottom: 10px;
+  .indEditingPage .multiple-input {
+    display: block; }
+  .indEditingPage .editingSubmitButton {
+    display: inline; }
+  .indEditingPage label {
+    padding-bottom: 20px;
     display: inline-block; }
-  .editingForm .projectCenterInputs {
-    display: inline-block;
-    margin: auto;
-    text-align: right; }
-    .editingForm .projectCenterInputs label {
-      font-size: 125%; }
+  .indEditingPage .line {
+    margin-right: 10px; }
+  .indEditingPage .editingSubmission {
+    font-size: 150%; }
+    .indEditingPage .editingSubmission .highlight {
+      font-size: 150%; }
+    .indEditingPage .editingSubmission form input {
+      margin: auto; }
+    .indEditingPage .editingSubmission a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #3c2a1e; }
+      .indEditingPage .editingSubmission a:hover {
+        color: #6f4e37; }
 
 /*# sourceMappingURL=stylesheet.css.map */

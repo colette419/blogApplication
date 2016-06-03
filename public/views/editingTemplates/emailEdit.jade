@@ -1,0 +1,41 @@
+doctype html
+head
+    title Le Blog - Edit Profile
+    link(href='/stylesheet.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    link(href='/normalize.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css')
+    link(href='/stylesheet.css', rel='stylesheet')
+    link(href='/responsive.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='scripts/javascript.js')
+body(class="indEditingPage")
+  div(class="banner")
+        h1 This Little Blog
+  nav
+      ul
+          li
+              a(href='/profile') menu
+          li
+              a(href='/addPost') new post 
+          li
+              a(href='/seeMyPosts') see my posts
+          li
+              a(href='/seePosts') see all posts
+          li(class="selected")
+              a(href='/edit') edit profile
+          li
+              a(href='/logout') logout
+  div(class="editingSubmission")
+    h2(class="welcome") Email Edits
+    form(action="/changeEmail" method="post" class="EmailInputCheckButton")
+        p Current Email: 
+        p(class="highlight")= user.email
+        label(class="multiple-input") New Email:
+          input(type="text" name="email" class="line" class="multiple-input EmailInputCheck")
+        label(class="multiple-input") Please enter your password to verify change: 
+          input(type="password" name="password" class="line" class="multiple-input")
+        input(class="editingSubmitButton" type="submit")
+    a(href='/edit') Go back to editing page
+  footer(id="footer")
+    p made in 2016 by colette biervliet-schranz

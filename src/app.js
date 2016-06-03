@@ -79,13 +79,13 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(request, response) {
-    if (request.body.username.length === 0 || request.body.password === 0) {
+    if (request.body.email.length === 0 || request.body.password === 0) {
         response.redirect('/?message=' + encodeURIComponent("Please enter a username and password."));
         return;
     } else {
         User.findOne({
             where: {
-                username: request.body.username
+                email: request.body.email
             }
         }).then(function(user) {
             if (user !== null) {
@@ -127,7 +127,6 @@ app.get('/seePosts', function(req, res) { //renders the page to see list of ALL 
                 }
             ]
         }).then(function(lines) {
-            console.log(lines);
             var columnData = lines.map(function(row) {
                 return {
                     id: row.dataValues.id,
@@ -498,75 +497,38 @@ app.get('/edit', function(request, response) {
     }
 });
 
-app.post('/edit', function(request, response) {
+
+app.get('/changeFirstName', function(request, response) {
     var user = request.session.user;
     if (user === undefined) {
         response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
     } else {
-        if (request.body.firstName.trim().length > 0 || request.body.lastName.trim().length > 0 ||
-            request.body.email.trim().length > 0 || request.body.username.trim().length > 0) {
-            var firstNameVar = null;
-            var lastNameVar = null;
-            var emailVar = null;
-            var usernameVar = null;
+        User.findOne({
+            where: {
+                id: user.id
+            }
+        }).then(function(user) {
+            response.render('editingTemplates/firstNameEdit', {
+                user: user
+            });
+        });
+    }
+});
+
+app.post('/changeFirstName', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        if (request.body.firstName.trim().length > 0) {
             User.findOne({
                 where: {
                     id: user.id
                 }
             }).then(function(user) {
-                if (request.body.firstName.trim().length > 0) {
-                    user.firstname = request.body.firstName.trim();
-                    user.save();
-                    firstNameVar = true;
-                }
-                if (request.body.lastName.trim().length > 0) {
-                    user.lastname = request.body.lastName.trim();
-                    user.save();
-                    lastNameVar = true;
-                }
-                if (request.body.email.trim().length > 0) {
-                    var uniqueUser1 = true;
-                    User.findAll().then(function(users, check) {
-                        var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
-                            return {
-                                email: user.dataValues.email,
-                            };
-                        });
-                        for (var i = 0; i < data.length; i++) {
-                            if (request.body.email.trim() === data[i].email) {
-                                uniqueUser1 = false;
-
-                        }
-                        if (uniqueUser1 === true) {
-                            user.email = request.body.email.trim();
-                            user.save();
-                        }
-                    });
-                }
-                if (request.body.username.trim().length > 0) {
-                    var uniqueUser2 = true;
-                    User.findAll().then(function(users) {
-                        var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
-                            return {
-                                username: user.dataValues.username,
-                            };
-                        });
-                        for (var i = 0; i < data.length; i++) {
-                            if (request.body.username.trim() === data[i].username) {
-                                uniqueUser2 = false;
-                            }
-                        }
-                        if (uniqueUser2 === true) {
-                            user.username = request.body.username.trim();
-                            user.save();
-                        }
-                    });
-                }
-                console.log("firstNameVar: " + firstNameVar);
-                console.log("lastNameVar: " + lastNameVar);
-                console.log("emailVar: " + emailVar);
-                console.log("usernameNameVar: " + usernameVar);
-                request.flash('changesMade', 'BOOBIES')
+                user.firstname = request.body.firstName.trim();
+                user.save();
+                request.flash('changesMade', 'CHANGES MADE: Please check below to ensure information is correct.')
                 response.redirect('/edit');
             })
         } else {
@@ -576,13 +538,187 @@ app.post('/edit', function(request, response) {
     }
 });
 
+app.get('/changeLastName', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        User.findOne({
+            where: {
+                id: user.id
+            }
+        }).then(function(user) {
+            response.render('editingTemplates/lastNameEdit', {
+                user: user
+            });
+        });
+    }
+});
 
+app.post('/changeLastName', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        if (request.body.lastName.trim().length > 0) {
+            User.findOne({
+                where: {
+                    id: user.id
+                }
+            }).then(function(user) {
+                user.lastname = request.body.lastName.trim();
+                user.save();
+                request.flash('changesMade', 'CHANGES MADE: Please check below to ensure information is correct.')
+                response.redirect('/edit');
+            })
+        } else {
+            request.flash('noInput', 'NO CHANGES MADE: You did not input any adjustments, so no changes were made to your user information.')
+            response.redirect('/edit');
+        }
+    }
+});
 
+app.get('/changeEmail', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        User.findOne({
+            where: {
+                id: user.id
+            }
+        }).then(function(user) {
+            response.render('editingTemplates/emailEdit', {
+                user: user
+            });
+        });
+    }
+});
 
+app.post('/changeEmail', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        if (request.body.email.trim().length > 0) {
+            User.findOne({
+                where: {
+                    id: user.id
+                }
+            }).then(function(user) {
+                bcrypt.compare(request.body.password, user.password, function(err, result) {
+                    if (err !== undefined) {
+                        console.log(err);
+                    } else {
+                        var matchin = result;
+                        if (matchin === true) { // if Passwords match, now check that it is unique:
+                            var uniqueUser1 = true;
+                            User.findAll().then(function(users) {
+                                var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
+                                    return {
+                                        email: user.dataValues.email,
+                                    };
+                                });
+                                for (var i = 0; i < data.length; i++) {
+                                    if (request.body.email.trim() === data[i].email) {
+                                        uniqueUser1 = false;
+                                    }
+                                }
+                                if (uniqueUser1 === true) {
+                                    user.email = request.body.email.trim();
+                                    user.save();
+                                    request.flash('changesMade', 'CHANGES MADE: Please check below to ensure information is correct.')
+                                    response.redirect('/edit');
+                                } else {
+                                    request.flash('noInput', 'NO CHANGES MADE: Entered Email Address is already in use.')
+                                    response.redirect('/edit');
+                                }
 
+                            })
+                        } else {
+                            request.flash('noInput', 'NO CHANGES MADE: Incorrect Password Entered.')
+                            response.redirect('/edit');
+                        }
+                    }
+                })
+            })
+        } else {
+            request.flash('noInput', 'NO CHANGES MADE: You did not input any adjustments, so no changes were made to your user information.')
+            response.redirect('/edit');
+        }
+    };
+});
 
+app.get('/changeUsername', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        User.findOne({
+            where: {
+                id: user.id
+            }
+        }).then(function(user) {
+            response.render('editingTemplates/usernameEdit', {
+                user: user
+            });
+        });
+    }
+});
 
+app.post('/changeUsername', function(request, response) {
+    var user = request.session.user;
+    if (user === undefined) {
+        response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+    } else {
+        if (request.body.username.trim().length > 0) {
+            User.findOne({
+                where: {
+                    id: user.id
+                }
+            }).then(function(user) {
+                bcrypt.compare(request.body.password, user.password, function(err, result) {
+                    if (err !== undefined) {
+                        console.log(err);
+                    } else {
+                        var matchin = result;
+                        if (matchin === true) { // if Passwords match, now check that it is unique:
+                            var uniqueUser2 = true;
+                            User.findAll().then(function(users) {
+                                var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
+                                    return {
+                                        username: user.dataValues.username,
+                                    };
+                                });
+                                for (var i = 0; i < data.length; i++) {
+                                    if (request.body.username.trim() === data[i].username) {
+                                        uniqueUser2 = false;
+                                    }
+                                }
+                                if (uniqueUser2 === true) {
+                                    user.username = request.body.username.trim();
+                                    user.save();
+                                    request.flash('changesMade', 'CHANGES MADE: Please check below to ensure information is correct.')
+                                    response.redirect('/edit');
+                                } else {
+                                    request.flash('noInput', 'NO CHANGES MADE: Entered Username is already in use.')
+                                    response.redirect('/edit');
+                                }
 
+                            })
+                        } else {
+                            request.flash('noInput', 'NO CHANGES MADE: Incorrect Password Entered.')
+                            response.redirect('/edit');
+                        }
+                    }
+                })
+            })
+        } else {
+            request.flash('noInput', 'NO CHANGES MADE: You did not input any adjustments, so no changes were made to your user information.')
+            response.redirect('/edit');
+        }
+    };
+});
 
 
 sequelize.sync().then(function() {

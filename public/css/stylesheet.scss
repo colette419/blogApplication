@@ -79,7 +79,6 @@ nav {
     }
 }
 
-
 .selected {
     a {
         text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
@@ -148,6 +147,7 @@ PAGES: LOGIN PAGE
         }
     }
 }
+
 
 /********************************************************
 PAGES: PROFILE PAGE
@@ -431,6 +431,7 @@ a.commentLink {
         border-top: 0;
         border-radius: 0;
         padding: 10px;
+        font-size: 125%;
     }
     .commentWrapper {
         padding-top: 20px;
@@ -508,8 +509,17 @@ PAGES: EDITING FORM
 
 .existingUserInfo {
     border: 1px solid $coffee-font;
+    border-bottom: 0px;
     text-align: center;
     padding-top: 50px;
+    p {
+        a {
+            color: $coffee-font;
+            &:hover {
+                color: $coffee-color;
+            }
+        }
+    }
     h2 {
         text-align: center;
     }
@@ -517,8 +527,16 @@ PAGES: EDITING FORM
         list-style: none;
         display: inline-block;
         margin-top: 0;
+        margin-left: 0;
+        padding-left: 0;
         li {
             text-align: left;
+            border: 1px solid $coffee-font;
+            border-bottom: 0;
+            &:last-child {
+                border-bottom: 1px solid $coffee-font;
+            }
+            padding: 5px;
             span {
                 font-size: 125%;
                 font-weight: bold;
@@ -527,40 +545,48 @@ PAGES: EDITING FORM
     }
 }
 
-.editingForm {
-    border: 1px solid $coffee-font;
-    padding: 20px;
+.editingButton {
+    @extend #registrationSubmit;
+    display: inline;
+    float: right;
+    text-decoration: none;
+    padding: 2px;
+    margin-left: 20px;
+}
+
+.indEditingPage {
     text-align: center;
-    p {
-        font-size: 125%;
+    .multiple-input {
+        display: block;
     }
-    a {
-        color: $coffee-font;
-        &:hover {
-            color: $coffee-color;
-        }
+    .editingSubmitButton {
+        @extend #registrationSubmit;
+        display: inline;
     }
-    h2 {
-        text-align: center;
+    label {
+        padding-bottom: 20px;
+        display: inline-block;
     }
     .line {
-        margin-bottom: 10px;
-        display: inline-block;
+        margin-right: 10px;
     }
-    .projectCenterInputs {
-        display: inline-block;
-        margin: auto;
-        text-align: right;
-        label {
-            font-size: 125%;
+    .editingSubmission {
+        font-size: 150%;
+        .highlight {
+            font-size: 150%;
+        }
+        form {
+            input {
+                margin: auto;
+            }
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: $coffee-font;
+            &:hover {
+                color: $coffee-color;
+            }
         }
     }
-
 }
-
-#editingSubmit {
-@extend #registrationSubmit;
-}
-
-
-

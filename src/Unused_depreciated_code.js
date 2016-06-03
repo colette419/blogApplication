@@ -1,4 +1,82 @@
+// app.post('/edit', function(request, response) {
+//     var user = request.session.user;
+//     var arrayOfChanges = [];
+//     if (user === undefined) {
+//         response.redirect('/?message=' + encodeURIComponent("Please log in to edit your profile."));
+//     } else {
+//         if (request.body.firstName.trim().length > 0 || request.body.lastName.trim().length > 0 ||
+//             request.body.email.trim().length > 0 || request.body.username.trim().length > 0) {
+//             var messageOfChanges = null;
+//             User.findOne({
+//                     where: {
+//                         id: user.id
+//                     }
+//                 }).then(function(user) {
+//                     if (request.body.firstName.trim().length > 0) {
+//                         user.firstname = request.body.firstName.trim();
+//                         user.save();
+//                     }
+//                 })
+//                 .then(function(user) {
+//                     if (request.body.lastName.trim().length > 0) {
+//                         user.lastname = request.body.lastName.trim();
+//                         user.save();
+//                     }
+//                 })
+//                 .then(function(user) {
+//                     if (request.body.email.trim().length > 0) {
+//                         var uniqueUser1 = true;
+//                         User.findAll().then(function(users) {
+//                             var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
+//                                 return {
+//                                     email: user.dataValues.email,
+//                                 };
+//                             });
+//                             for (var i = 0; i < data.length; i++) {
+//                                 if (request.body.email.trim() === data[i].email) {
+//                                     uniqueUser1 = false;
+//                                     arrayOfChanges.push("nonUniqueEmail");
+//                                 }
+//                             }
+//                             if (uniqueUser1 === true) {
+//                                 user.email = request.body.email.trim();
+//                                 user.save();
+//                             }
+//                         });
+//                     }
+//                 }).then(function(user) {
+//                     if (request.body.username.trim().length > 0) {
+//                         var uniqueUser2 = true;
+//                         User.findAll().then(function(users) {
+//                             var data = users.map(function(user) { // ".map" iterates through all the items in an array. it is returning some values for each post in posts.
+//                                 return {
+//                                     username: user.dataValues.username,
+//                                 };
+//                             });
+//                             for (var i = 0; i < data.length; i++) {
+//                                 if (request.body.username.trim() === data[i].username) {
+//                                     uniqueUser2 = false;
+//                                     arrayOfChanges.push("nonUniqueUsername");
+//                                 }
+//                             }
+//                             if (uniqueUser2 === true) {
+//                                 user.username = request.body.username.trim();
+//                                 user.save();
+//                             }
+//                         });
+//                     }
+//                 }).then(function() {
+//                     console.log(arrayOfChanges);
+//                     request.flash('changesMade', 'CHANGES MADE: Please check below to ensure information is correct.')
+//                     response.redirect('/edit');
+//                 })
+//         } else {
+//             request.flash('noInput', 'NO CHANGES MADE: You did not input any adjustments, so no changes were made to your user information.')
+//             response.redirect('/edit');
+//         }
 
+//     };
+// });
 
 
 

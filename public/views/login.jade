@@ -25,10 +25,10 @@ body#loginBody
           h2.alert= passwordMessage
       div(id="formAndMessages")
         h2.alert= message
-        h2 Please Enter Your Username and Password Below:
+        h2 Please Enter Your Email and Password Below:
         form(action="/" method="post" id="loginForm")
-            p Username
-            input#userNameInput(type="text" name="username")
+            p Email
+            input#userNameInput(type="text" name="email")
             p Password
             input#passwordInput(type="password" name="password")
             a(href='/forgot') Forgot your password?

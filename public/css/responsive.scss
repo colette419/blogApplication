@@ -87,7 +87,9 @@ PAGES: REGISTRATION
             font-size: 125%;
         }
     }
-
+    .existingUserInfo {
+        font-size: 150%;
+    }
 }
 
 
@@ -109,7 +111,7 @@ OVERWRITES FOR TABLET TO DESKTOP
             font-size: 300%;
         }
     }
-/********************************************************
+    /********************************************************
     PAGES: PROFILE PAGE
 *********************************************************/
     #options {
@@ -125,7 +127,7 @@ OVERWRITES FOR TABLET TO DESKTOP
             font-size: 250%;
         }
     }
-/********************************************************
+    /********************************************************
 PAGES: ADD POST
 *********************************************************/
     #addPost {
@@ -144,7 +146,6 @@ PAGES: ADD POST
             min-height: 400px;
         }
     }
-
 }
 
 @media screen and (min-width: 800px) {
