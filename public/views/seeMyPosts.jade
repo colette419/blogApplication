@@ -25,6 +25,9 @@ body
                 a(href='/edit') edit profile
             li
                 a(href='/logout') logout
+    div(class="postBrilliance")
+        if postBrilliance
+            h2.alert= postBrilliance
     div(class="intro")
         h2 #{user.firstname}'s Posts
         div(class="tableOfContents")

@@ -100,8 +100,7 @@ app.post('/', function(request, response) {
         return;
     } else {
         User.findOne({
-            where: 
-            sequelize.where(sequelize.fn('lower', sequelize.col('email')), sequelize.fn('lower', request.body.email))
+            where: sequelize.where(sequelize.fn('lower', sequelize.col('email')), sequelize.fn('lower', request.body.email))
         }).then(function(user) {
             if (user !== null) {
                 bcrypt.compare(request.body.password, user.password, function(err, result) {
@@ -114,11 +113,13 @@ app.post('/', function(request, response) {
                         request.session.user = user;
                         response.redirect('/profile');
                     } else {
-                        response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
+                        request.flash('info', 'Invalid email or password.')
+                        response.redirect('/');
                     }
                 });
             } else {
-                response.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
+                request.flash('info', 'Invalid email or password.')
+                response.redirect('/');
             };
         });
     };
@@ -132,7 +133,28 @@ app.post('/', function(request, response) {
 app.get('/seePosts', function(req, res) { //renders the page to see list of ALL post titles; must send an object containing the correct posts to that page
     var user = req.session.user;
     if (user === undefined) {
-        res.redirect('/?message=' + encodeURIComponent("Please log in to view messages."));
+        Post.findAll({
+            include: [
+                User, {
+                    model: Comment,
+                    include: [User]
+                }
+            ]
+        }).then(function(lines) {
+            var columnData = lines.map(function(row) {
+                return {
+                    id: row.dataValues.id,
+                    user: row.dataValues.user,
+                    title: row.dataValues.posttitle,
+                    body: row.dataValues.postbody,
+                    comments: row.dataValues.comments,
+                }
+            });
+            res.render('seePosts', {
+                message: columnData,
+                headingMessage: "Viewing User Posts as a Guest."
+            });
+        })
     } else {
         Post.findAll({
             include: [
@@ -166,7 +188,7 @@ app.get('/seePosts', function(req, res) { //renders the page to see list of ALL 
 app.post('/seePosts', function(req, res) { //renders the page to see list of ALL post titles; must send an object containing the correct posts to that page
     var user = req.session.user;
     if (user === undefined) {
-        res.redirect('/?message=' + encodeURIComponent("Please log in to view messages."));
+        res.redirect('/?message=' + encodeURIComponent("Please log in to comment."));
     } else {
         if (req.body.commentBody.length === 0) {
             res.redirect('/seePosts/' + request.params.id + '?alert=' + encodeURIComponent("!!!You must submit text to post a comment!!!"));
@@ -208,7 +230,7 @@ app.post('/seePosts/:id', function(request, response) { //add if statement so yo
 app.get('/seeMyPosts', function(req, res) { //renders the page to see list of USER'S post titles
     var user = req.session.user;
     if (user === undefined) {
-        res.redirect('/?message=' + encodeURIComponent("Please log in to view messages."));
+        res.redirect('/?message=' + encodeURIComponent("Please log in to view your messages."));
     } else {
         Post.findAll({
             where: { userId: user.id },
@@ -287,7 +309,8 @@ app.post('/addPost', function(req, res) {
             postbody: req.body.blogBody
         })
         .then(function() {
-            res.redirect('/seeMyPosts?message=' + encodeURIComponent("You've just successfully posted your brilliance. What next?"))
+            req.flash('posted', "You've just successfully posted your brilliance. What next?")
+            res.redirect('/seeMyPosts');
         });
 });
 

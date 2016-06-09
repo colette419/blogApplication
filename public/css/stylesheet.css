@@ -334,6 +334,9 @@ a.commentLink {
     cursor: pointer;
     cursor: hand; }
 
+.postBrilliance h2 {
+  font-size: 200%; }
+
 /********************************************************
 PAGES: REGISTRATION FORM
 *********************************************************/

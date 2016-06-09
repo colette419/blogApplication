@@ -9,44 +9,72 @@ head
     link(href='/responsive.css', rel='stylesheet')
     script(src='scripts/javascript.js')
 body
-    div(class="banner")
-        h1 This Little Blog
-    nav
-        ul
-            li
-                a(href='/profile') menu 
-            li
-                a(href='/addPost') new post 
-            li
-                a(href='/seeMyPosts') see my posts
-            li(class="selected")
-                a(href='/seePosts') see all posts
-            li
-                a(href='/edit') edit profile
-            li
-                a(href='/logout') logout
-    div(class="intro")
-        h2 All User Posts
-        div(class="tableOfContents")
-            h3 Quick Nav
+    if user
+        div(class="banner")
+            h1 This Little Blog
+        nav
+            ul
+                li
+                    a(href='/profile') menu 
+                li
+                    a(href='/addPost') new post 
+                li
+                    a(href='/seeMyPosts') see my posts
+                li(class="selected")
+                    a(href='/seePosts') see all posts
+                li
+                    a(href='/edit') edit profile
+                li
+                    a(href='/logout') logout
+        div(class="intro")
+            h2 All User Posts
+            div(class="tableOfContents")
+                h3 Quick Nav
+                each post in message
+                    li 
+                        a(href="#titleLink_#{post.id}") #{post.title}, by #{post.user.username}
+        div(class="messageDisplay")
             each post in message
-                li 
-                    a(href="#titleLink_#{post.id}") #{post.title}, by #{post.user.username}
-    div(class="messageDisplay")
-        each post in message
-          li 
-            p.titleLink(id="titleLink_#{post.id}") #{post.title}, by #{post.user.username}
-            p #{post.body}
-            a.commentLink(id="#{post.id}") + click here for comments on this post
-            div(class="commentDropdown" id="commentID_#{post.id}")
-                ul
-                    each comment in post.comments
-                        li #{comment.user.username}: #{comment.comment}
-                .commentWrapper
-                    form(action="/seePosts" method="post" class="commentSubmitForm" id="commentForm_#{post.id}")
-                        input(type="hidden" name="blogMessageId" value="#{post.id}")
-                        input(type="hidden" name="UserId" value="#{user}")
-                        textarea(class="commentForm" type="text" name="commentBody")
-                        input(class="commentSubmit" id="commentSubmit_#{post.id}" type="submit")
-    footer(id="footer")
-        p made in 2016 by colette biervliet-schranz
+              li 
+                p.titleLink(id="titleLink_#{post.id}") #{post.title}, by #{post.user.username}
+                p #{post.body}
+                a.commentLink(id="#{post.id}") + click here for comments on this post
+                div(class="commentDropdown" id="commentID_#{post.id}")
+                    ul
+                        each comment in post.comments
+                            li #{comment.user.username}: #{comment.comment}
+                    .commentWrapper
+                        form(action="/seePosts" method="post" class="commentSubmitForm" id="commentForm_#{post.id}")
+                            input(type="hidden" name="blogMessageId" value="#{post.id}")
+                            input(type="hidden" name="UserId" value="#{user}")
+                            textarea(class="commentForm" type="text" name="commentBody")
+                            input(class="commentSubmit" id="commentSubmit_#{post.id}" type="submit")
+        footer(id="footer")
+            p made in 2016 by colette biervliet-schranz
+    else 
+        div(class="banner")
+            h1 This Little Blog
+        div(class="lil_nav")
+            a(href="/")
+                img(src="/images/log.jpg")
+                p Go Back to Login
+        div(class="intro")
+            h2 View-Only Guest Mode
+            div(class="tableOfContents")
+                h3 Quick Nav
+                each post in message
+                    li 
+                        a(href="#titleLink_#{post.id}") #{post.title}, by #{post.user.username}
+        div(class="messageDisplay")
+            each post in message
+              li 
+                p.titleLink(id="titleLink_#{post.id}") #{post.title}, by #{post.user.username}
+                p #{post.body}
+                a.commentLink(id="#{post.id}") + click here for comments on this post
+                div(class="commentDropdown" id="commentID_#{post.id}")
+                    ul
+                        each comment in post.comments
+                            li #{comment.user.username}: #{comment.comment}
+                        li Please login to post a comment.
+        footer(id="footer")
+            p made in 2016 by colette biervliet-schranz
