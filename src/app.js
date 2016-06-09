@@ -89,10 +89,6 @@ app.get('/', function(req, res) {
     });
 });
 
-// where: { sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'))
-// Db.models.Person.findAll(where: sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'));
-// Db.models.Person.findAll(where: sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'));
-
 
 app.post('/', function(request, response) {
     if (request.body.email.length === 0 || request.body.password === 0) {
@@ -280,7 +276,7 @@ app.get('/profile', function(request, response) {
             }
         }).then(function(user) {
             response.render('profile', {
-                message: request.query.message,
+                message: request.flash('registered'),
                 user: user
             });
         });
@@ -374,7 +370,8 @@ app.post('/register', function(req, res) {
                         password: hashPassword,
                     }).then(function(user) {
                         req.session.user = user;
-                        res.redirect('/profile?message=' + encodeURIComponent("You've just registered! See below for the new world of opportunity available ;)!"));
+                        req.flash('registered', "You've just registered! See below for the new world of opportunity available ;)!")
+                        res.redirect('/profile');
                     });
                 })
             } else {
