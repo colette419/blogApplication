@@ -20,6 +20,8 @@ body#loginBody
     else
       div(class="banner")
         h1 This Little Blog
+      div(id="readMessagesLink")
+        a(href="/seePosts") Read All Posts as a Guest
       div(class="passwordMessage")
         if passwordMessage
           h2.alert= passwordMessage

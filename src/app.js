@@ -16,17 +16,17 @@ var flash = require('connect-flash');
 
 
 
-var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
-    host: 'localhost',
-    dialect: 'postgres'
-});
-
-// sequelize = new Sequelize(process.env.DATABASE_URL, {
-//   logging: false,
-//   dialectOptions: {
-//     ssl: true /* for SSL config since Heroku gives you this out of the box */
-//   }
+// var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
+//     host: 'localhost',
+//     dialect: 'postgres'
 // });
+
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+  logging: false,
+  dialectOptions: {
+    ssl: true /* for SSL config since Heroku gives you this out of the box */
+  }
+});
 
 app.set('view engine', 'jade');
 app.set('views', './public/views');
@@ -398,9 +398,7 @@ app.get('/forgot', function(req, res) {
 app.post('/forgot', function(req, res) {
     var token = randtoken.generate(20);
     User.findOne({
-            where: {
-                email: req.body.email
-            }
+            where: sequelize.where(sequelize.fn('lower', sequelize.col('email')), sequelize.fn('lower', req.body.email))
         })
         .then(function(user) {
             if (!user) {

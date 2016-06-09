@@ -106,6 +106,20 @@ PAGES: LOGIN PAGE
   .choices a:hover {
     color: #6f4e37; }
 
+#readMessagesLink {
+  text-align: left;
+  color: #3c2a1e;
+  display: block; }
+  #readMessagesLink a {
+    color: #3c2a1e;
+    padding: 0 10px 10px 10px;
+    text-decoration: none;
+    background: #6f4e37;
+    font-size: 125%;
+    border-radius: 0 0 10px 10px; }
+    #readMessagesLink a:hover {
+      color: white; }
+
 /********************************************************
 PAGES: PROFILE PAGE
 *********************************************************/

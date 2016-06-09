@@ -148,6 +148,23 @@ PAGES: LOGIN PAGE
     }
 }
 
+#readMessagesLink {
+    text-align: left;
+    color: $coffee-font;
+    display: block;
+    a {
+        color: $coffee-font;
+        padding: 0 10px 10px 10px;
+        text-decoration: none;
+        background: $coffee-color;
+        font-size: 125%;
+        border-radius: 0 0 10px 10px;
+        &:hover {
+            color: white;
+        }
+    }
+}
+
 
 /********************************************************
 PAGES: PROFILE PAGE
