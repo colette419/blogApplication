@@ -27,11 +27,11 @@ body(class="indEditingPage")
               a(href='/logout') logout
   div(class="editingSubmission")
     h2(class="welcome") Email Edits
-    form(action="/changeEmail" method="post" class="EmailInputCheckButton")
+    form(action="/changeEmail" method="post" class="EmailInputCheckButton" id="changeEmailForm")
         p Current Email: 
         p(class="highlight")= user.email
         label(class="multiple-input") New Email:
-          input(type="text" name="email" class="line" class="multiple-input EmailInputCheck")
+          input(type="text" name="email" class="line" class="multiple-input EmailInputCheck" id="changeEmailInput")
         label(class="multiple-input") Please enter your password to verify change: 
           input(type="password" name="password" class="line" class="multiple-input")
         input(class="editingSubmitButton" type="submit")

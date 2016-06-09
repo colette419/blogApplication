@@ -60,7 +60,7 @@ $(document).ready(function() {
                     });
             });
 
-            $(".EmailInputCheck").blur(function() {
+            $("#registerEmail").blur(function() {
                 if ($(this).val().trim().length > 0) {
                     var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                     if ($(this).val().trim().match(mailFormat)) {
@@ -71,10 +71,33 @@ $(document).ready(function() {
                 }
             });
 
-            $(".EmailInputCheckButton").on('submit', function(event) {
-                    if ($(".EmailInputCheck").val().trim().length > 0) {
+            $("#registerForm").on('submit', function(event) {
+                    if ($("#registerEmail").val().trim().length > 0) {
                         var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                        if ($(".EmailInputCheck").val().trim().match(mailFormat)) {
+                        if ($("#registerEmail").val().trim().match(mailFormat)) {
+                            return (true);
+                        }
+                        event.preventDefault();
+                        alert("You have entered an invalid email address!");
+                        return (false);
+                    };
+            });
+
+            $("#changeEmailInput").blur(function() {
+                if ($(this).val().trim().length > 0) {
+                    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if ($(this).val().trim().match(mailFormat)) {
+                        return (true);
+                    }
+                    alert("You have entered an invalid email address!");
+                    return (false);
+                }
+            });
+
+            $("#changeEmailForm").on('submit', function(event) {
+                    if ($("#changeEmailInput").val().trim().length > 0) {
+                        var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                        if ($("#changeEmailInput").val().trim().match(mailFormat)) {
                             return (true);
                         }
                         event.preventDefault();

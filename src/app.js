@@ -16,17 +16,17 @@ var flash = require('connect-flash');
 
 
 
-// var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
-//     host: 'localhost',
-//     dialect: 'postgres'
-// });
-
-sequelize = new Sequelize(process.env.DATABASE_URL, {
-  logging: false,
-  dialectOptions: {
-    ssl: true /* for SSL config since Heroku gives you this out of the box */
-  }
+var sequelize = new Sequelize('bulletinboard', 'WebDevelopment', null, {
+    host: 'localhost',
+    dialect: 'postgres'
 });
+
+// sequelize = new Sequelize(process.env.DATABASE_URL, {
+//   logging: false,
+//   dialectOptions: {
+//     ssl: true /* for SSL config since Heroku gives you this out of the box */
+//   }
+// });
 
 app.set('view engine', 'jade');
 app.set('views', './public/views');
@@ -89,15 +89,19 @@ app.get('/', function(req, res) {
     });
 });
 
+// where: { sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'))
+// Db.models.Person.findAll(where: sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'));
+// Db.models.Person.findAll(where: sequelize.where(sequelize.fn('lower', sequelize.col('firstname')), sequelize.fn('lower', 'somename'));
+
+
 app.post('/', function(request, response) {
     if (request.body.email.length === 0 || request.body.password === 0) {
         response.redirect('/?message=' + encodeURIComponent("Please enter a username and password."));
         return;
     } else {
         User.findOne({
-            where: {
-                email: request.body.email
-            }
+            where: 
+            sequelize.where(sequelize.fn('lower', sequelize.col('email')), sequelize.fn('lower', request.body.email))
         }).then(function(user) {
             if (user !== null) {
                 bcrypt.compare(request.body.password, user.password, function(err, result) {
